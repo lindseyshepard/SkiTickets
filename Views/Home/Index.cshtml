@@ -1,0 +1,91 @@
+﻿
+@model Lindsey.Models.ResortViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+    <html5>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lindsey Shepard</title>
+
+        <link rel="stylesheet" href="/css/site.css">
+        <!-- Add social library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+
+
+                   .transbox {
+            background: rgba(255, 255, 255, 0.78);
+            
+            font-size: 22px;
+            opacity: 1.0;
+            width: 80%;
+            margin-left:50%;
+                margin-right:50%;
+            /*text-align: center;*/
+            /*padding: 20px 20px;*/
+        }
+</style>
+<div class="transbox">
+
+        <body>
+            <center>
+                <h1>Winter, <i>made easy</i></h1>
+                <p>Welcome!</p>
+                <p>Compare lift ticket prices, before you get there!</p>
+
+            </center>
+        </body>
+        <br />
+        <br />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(x => x.State, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "State" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ResortName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ResortName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ResortName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+    </html5>

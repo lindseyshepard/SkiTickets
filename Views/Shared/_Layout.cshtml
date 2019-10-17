@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter - made easy</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <style>
+
+
+        body {
+            background-image: url("../../fonts/Images/adventure-alpine-climb-869258.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: scroll;
+        }
+               /*.transbox {
+            background: rgba(255, 255, 255, 0.78);
+            c
+            font-size: 22px;
+            opacity: 1.0;
+            width: 50%;
+            margin:
+            /*text-align: center;*/
+            /*padding: 20px 20px;*/
+        }*/
+
+.navbar{
+
+      list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0c084c;
+  position: fixed;
+  top: 0;
+  width: 100%;
+   float: left;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+ background-color:rgba(13, 9, 77, 0.14);
+}
+
+
+
+        .footer {
+            position: fixed;
+           bottom:100px;
+            width: 100%;
+            color: white;
+            background-color:#8a8a8a;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+            <div class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Winter - made easy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+
+            </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+
+
+
+
+            <footer>
+                <center>
+                    <p>&copy; @DateTime.Now.Year - Winter, made easy - Lindsey Shepard</p>
+                </center>
+            </footer>
+
+</body>
+</html>

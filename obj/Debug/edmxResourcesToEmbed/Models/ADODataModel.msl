@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SkiingModelStoreContainer" CdmEntityContainer="SkiingEntities">
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="SkiingModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ResortID" ColumnName="ResortID" />
+          <ScalarProperty Name="TicketTypeID" ColumnName="TicketTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketTypes">
+      <EntityTypeMapping TypeName="SkiingModel.TicketType">
+        <MappingFragment StoreEntitySet="TicketType">
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resorts">
+      <EntityTypeMapping TypeName="SkiingModel.Resort">
+        <MappingFragment StoreEntitySet="Resorts">
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ResortName" ColumnName="ResortName" />
+          <ScalarProperty Name="ResortId" ColumnName="ResortId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="SkiingModel.State">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

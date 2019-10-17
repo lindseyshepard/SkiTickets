@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SkiingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Resorts">
+    <Key>
+      <PropertyRef Name="ResortId" />
+    </Key>
+    <Property Name="ResortId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResortName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Zip" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abbreviation" Type="nvarchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ResortID" Type="int" Nullable="false" />
+    <Property Name="TicketTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="TicketTypeId" />
+    </Key>
+    <Property Name="TicketTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Ticket_Resorts">
+    <End Role="Resorts" Type="Self.Resorts" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resorts">
+        <PropertyRef Name="ResortId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ResortID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TicketType">
+    <End Role="TicketType" Type="Self.TicketType" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketType">
+        <PropertyRef Name="TicketTypeId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="TicketTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SkiingModelStoreContainer">
+    <EntitySet Name="Resorts" EntityType="Self.Resorts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketType" EntityType="Self.TicketType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Ticket_Resorts" Association="Self.FK_Ticket_Resorts">
+      <End Role="Resorts" EntitySet="Resorts" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TicketType" Association="Self.FK_Ticket_TicketType">
+      <End Role="TicketType" EntitySet="TicketType" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

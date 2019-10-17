@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SkiingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ResortID" Type="Int32" Nullable="false" />
+    <Property Name="TicketTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TicketType" Relationship="SkiingModel.FK_Ticket_TicketType" FromRole="Ticket" ToRole="TicketType" />
+    <NavigationProperty Name="Resort" Relationship="SkiingModel.FK_Ticket_Resorts" FromRole="Ticket" ToRole="Resort" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="TicketTypeId" />
+    </Key>
+    <Property Name="TicketTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tickets" Relationship="SkiingModel.FK_Ticket_TicketType" FromRole="TicketType" ToRole="Ticket" />
+  </EntityType>
+  <EntityContainer Name="SkiingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+    <EntitySet Name="TicketTypes" EntityType="Self.TicketType" />
+    <AssociationSet Name="FK_Ticket_TicketType" Association="SkiingModel.FK_Ticket_TicketType">
+      <End Role="TicketType" EntitySet="TicketTypes" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <EntitySet Name="Resorts" EntityType="SkiingModel.Resort" />
+    <AssociationSet Name="FK_Ticket_Resorts" Association="SkiingModel.FK_Ticket_Resorts">
+      <End Role="Resort" EntitySet="Resorts" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <EntitySet Name="States" EntityType="SkiingModel.State" />
+  </EntityContainer>
+  <Association Name="FK_Ticket_TicketType">
+    <End Type="SkiingModel.TicketType" Role="TicketType" Multiplicity="1" />
+    <End Type="SkiingModel.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketType">
+        <PropertyRef Name="TicketTypeId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="TicketTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Resort">
+    <Key>
+      <PropertyRef Name="ResortId" />
+    </Key>
+    <Property Name="ResortId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tickets" Relationship="SkiingModel.FK_Ticket_Resorts" FromRole="Resort" ToRole="Ticket" />
+  </EntityType>
+  <Association Name="FK_Ticket_Resorts">
+    <End Type="SkiingModel.Resort" Role="Resort" Multiplicity="1" />
+    <End Type="SkiingModel.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resort">
+        <PropertyRef Name="ResortId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ResortID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>
